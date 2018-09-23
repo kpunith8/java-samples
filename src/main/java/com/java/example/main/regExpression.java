@@ -6,11 +6,9 @@ import java.util.regex.Pattern;
 
 public class regExpression
 {
-
     /*
      * Find the consecutive duplicate words in the sentence and remove them to make a perfect sentence
      */
-
     public static void main(String[] args)
     {
         String pattern = "\\b(\\w+)(\\b\\W+\\b\\1\\b)*";
@@ -35,7 +33,5 @@ public class regExpression
             System.out.println(input);
             testCases--;
         }
-
     }
-
 }

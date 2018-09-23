@@ -3,6 +3,13 @@ package com.java.example.functional.programming;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * <p>
+ * Functional programming examples using lambda and streams
+ * </p>
+ * 
+ * @author Punith K
+ */
 public class IteratingArray
 {
     public static void main(String[] args)

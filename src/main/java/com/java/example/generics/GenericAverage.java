@@ -2,7 +2,6 @@ package com.java.example.generics;
 
 public class GenericAverage
 {
-
     public static void main(String[] args)
     {
         Double doubleNums[] = { 1.0, 2.0, 3.0, 4.0 };

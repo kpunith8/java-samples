@@ -2,10 +2,7 @@ package com.java.example.generics;
 
 /**
  * <p>
- * Generic method example.
- * </p>
- * <p>
- * Copyright &copy 2017 Cerner Corporation
+ *
  * </p>
  * 
  * @author Punith K

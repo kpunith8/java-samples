@@ -2,10 +2,8 @@ package com.java.example.main;
 
 public class StringTest
 {
-
     public static void main(String[] args)
     {
-
         StringBuilder sb = new StringBuilder();
 
         // Default capacity of the String Buffer
