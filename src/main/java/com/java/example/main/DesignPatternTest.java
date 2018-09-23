@@ -1,6 +1,11 @@
-package com.java.example.abstractfactory;
+package com.java.example.main;
 
-public class TestDesignPattern
+import com.java.example.abstractfactory.Computer;
+import com.java.example.abstractfactory.ComputerFactory;
+import com.java.example.abstractfactory.PCFactory;
+import com.java.example.abstractfactory.ServerFactory;
+
+public class DesignPatternTest
 {
     public static void main(String[] args)
     {
