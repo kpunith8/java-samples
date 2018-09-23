@@ -1,6 +1,6 @@
 package com.java.example.main;
 
-import com.java.example.builder.pattern.NutritionFactBuilderPattern;
+import com.java.example.builderpattern.NutritionFactBuilderPattern;
 
 public class BuilderPatternTest {
 
