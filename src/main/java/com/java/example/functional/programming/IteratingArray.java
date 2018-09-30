@@ -131,7 +131,7 @@ public class IteratingArray
 		// Stream.iterate(100, e -> e + 1); which will create a infinite numbers
 		// starting from 100, but it gives Head
 		// with laziness
-		// Convert all the names to uppercase separarated by comma
+		// Convert all the names to upper case separated by comma, String Joining
 		System.out.println("Convert to uppercase and separate by comma: "
 				+ names.stream().map(String::toUpperCase).collect(joining(", ")));
 	}

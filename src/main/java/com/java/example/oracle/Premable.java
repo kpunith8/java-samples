@@ -5,7 +5,6 @@ import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
 @interface Premable {
-
     String author();
 
     String date();

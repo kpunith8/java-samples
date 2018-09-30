@@ -1,10 +1,6 @@
 package com.java.example.generics;
 
 /**
- * <p>
- *
- * </p>
- * 
  * @author Punith K
  */
 public class CompareUtil {

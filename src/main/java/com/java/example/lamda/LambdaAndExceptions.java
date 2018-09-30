@@ -8,6 +8,8 @@ interface DoubleNumericArrayFunc
 
 class EmptyArrayException extends Exception
 {
+    private static final long serialVersionUID = -233607494479557742L;
+
     EmptyArrayException()
     {
         super("Empty array not allowed");
