@@ -8,7 +8,13 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-public class Java8Streams
+import com.java.example.model.Gender;
+import com.java.example.model.Person;
+
+// 1. Streams does not hold any data; it pulls the data it processes from a source
+// 2. Stream does not modify the data it processes
+// 3. Source may be unbounded; not finite and size of the source is not known at built time.
+public class StreamExample
 {
 	public static List<Person> createPeople()
 	{
@@ -30,8 +36,19 @@ public class Java8Streams
 
 	public static void main(String[] args)
 	{
-		List<Person> people = createPeople();
-		
+        // Initialise with new ArrayList(createPeople()), it won't allow removing
+        // action on Arrays.asList()
+        List<Person> people = createPeople();
+
+        // people.add(new Person("Sara", Gender.FEMALE, 28));
+        // people.add(new Person("Jack", Gender.FEMALE, 2));
+        //
+        // System.out.println("Before Removing collection size: " + people.size());
+        //
+        // people.removeIf(person -> person.getAge() < 5);
+        //
+        // System.out.println("After Removing collection size: " + people.size());
+
 		// Compare by name
 		// printSorted(people, comparing(Person::getName));
 		
@@ -49,5 +66,6 @@ public class Java8Streams
 		// Grouping people based on their age, name
 		System.out.println(people.stream().collect(
 				groupingBy(Person::getAge, mapping(Person::getName, toList()))));
+
 	}
 }

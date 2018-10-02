@@ -1,4 +1,4 @@
-package com.java.example.functional.programming;
+package com.java.example.model;
 
 public class Person
 {
@@ -33,10 +33,5 @@ public class Person
 	{
 		return name + " -- " + gender + " -- " + age;
 	}
-}
-
-enum Gender
-{
-	MALE, FEMALE;
 }
 

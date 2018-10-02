@@ -12,18 +12,21 @@ import java.util.List;
  * 
  * @author Punith K
  */
-public class IteratingArray
+public class MethodRefesAndStreams
 {
 	public static void main(String[] args)
 	{
 		List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 		List<String> names = Arrays.asList("Tom", "Jerry", "Jack", "Jose");
+
+        /* Iterating through array */
 		// External iterators
 		/*
 		 * for (int i = 0; i < numbers.size(); i++) {
 		 * System.out.println(numbers.get(i)); } for (int number : numbers) {
 		 * System.out.println(number); }
 		 */
+
 		// Internal iterators
 		// Passing annonymous function to forEach
 		/*
@@ -31,19 +34,30 @@ public class IteratingArray
 		 * @Override public void accept(Integer value) { System.out.println(value);
 		 * } });
 		 */
+
 		// Using lambda
 		// numbers.forEach(value -> System.out.println(value));
+
 		// Using method references
 		// numbers.forEach(System.out::println);
-		// Find the total of double of even numbers
+
+        /* Find the total of double of even numbers */
 		// Imperative way
-		/*
-		 * int result = 0; for (int number : numbers) { if (number % 2 == 0) {
-		 * result += number * 2; } } System.out.println(result);
-		 */
-		// Functional way: Using streams
+
+        // int result = 0;
+        // for (int number : numbers)
+        // {
+        // if (number % 2 == 0)
+        // {
+        // result += number * 2;
+        // }
+        // }
+        // System.out.println(result);
+
+        /* Functional way: Using streams */
 		// System.out.println(numbers.stream().filter(number -> number % 2 ==
 		// 0).mapToInt(number -> number * 2).sum());
+
 		// final int factor = 2;
 		/*
 		 * Java 8 makes it effectively final if it is referenced from a lambda
@@ -51,10 +65,13 @@ public class IteratingArray
 		 */
 		// numbers.stream().map(number -> number *
 		// factor).forEach(System.out::println);
-		// This lambda has to close-over it defining scope looking for variable
-		// 'factor' to bind to - Closure
-		// Lambdas are stateless
-		// Closure has Immutable state
+
+        /*
+         * This lambda has to close-over it defining scope looking for variable 'factor' to bind to - Closure Lambdas
+         * are stateless; Closure has Immutable state
+         */
+
+
 		/*
 		 * Method references, works on static methods and instance variables as well
 		 */
