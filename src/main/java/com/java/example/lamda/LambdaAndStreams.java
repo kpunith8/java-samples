@@ -78,5 +78,23 @@ public class LambdaAndStreams {
         System.out.println("Convert a given string to uppercase using Function: " + convertToUppercase.apply("Punith"));
         
         printAsIs.accept("Punith");
+
+        Function<Integer, Integer> incrementByOne = e -> e + 1;
+        Function<Integer, Integer> doubleIt = e -> e * 2;
+
+        doWork(5, incrementByOne);
+        doWork(5, doubleIt);
+
+        // Increment by one and then double the value
+        int temp = incrementByOne.apply(5);
+        System.out.println(doubleIt.apply(temp));
+
+        // It can also be done as follows
+        doWork(6, incrementByOne.andThen(doubleIt));
+    }
+
+    private static void doWork(int value, Function<Integer, Integer> func)
+    {
+        System.out.println(func.apply(value));
     }
 }

@@ -1,9 +1,5 @@
 package com.java.example.functional.programming;
 
-import static java.util.stream.Collectors.joining;
-import static java.util.stream.Collectors.toList;
-import static java.util.stream.Collectors.toMap;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -90,8 +86,7 @@ public class MethodRefsAndStreams
          */
 
         /* Without using method references */
-        // numbers.stream().map(number ->
-        // String.valueOf(number)).forEach(System.out::println);
+        // numbers.stream().map(number -> String.valueOf(number)).forEach(System.out::println);
 
         /*
          * Using static method reference on String.valueOf(), since it accepts only parameter
@@ -105,14 +100,12 @@ public class MethodRefsAndStreams
         /*
          * Passing multiple parameters to method references, order should be maintained without method references
          */
-        // int sumWithoutMethodReferences = numbers.stream().reduce(0, (total,
-        // number) -> Integer.sum(total, number));
+        // int sumWithoutMethodReferences = numbers.stream().reduce(0, (total, number) -> Integer.sum(total, number));
 
-        // int sumWithMethodReferences = numbers.stream().reduce(0, Integer::sum);
-        // System.out.println("Passing multiple params to method references: Where
-        // first and second params are
-        // arguments"
-        // + sumWithMethodReferences);
+        int sumWithMethodReferences = numbers.stream().reduce(0, Integer::sum);
+        System.out
+                .println("Passing multiple params to method references: Where first and second params are  arguments: "
+                        + sumWithMethodReferences);
 
         // String convertIntToString =
         // numbers.stream().map(String::valueOf).reduce("", String::concat);
@@ -150,14 +143,14 @@ public class MethodRefsAndStreams
          * To get rid of mutating the list use collect(toList()) which will return a list once the processing on stream
          * is done, toList() is a static import from java.util.streams.Collectors.*;
          */
-        List<Integer> doubleOfEven = numbers.stream().filter(number -> number % 2 == 0).map(number -> number * 2)
-                .collect(toList());
-
-        System.out.println(doubleOfEven);
-
-        /* Create a map with name and age as key and person object as value */
-        System.out.println(
-                people.stream().collect(toMap(person -> person.getName() + "-" + person.getAge(), person -> person)));
+        // List<Integer> doubleOfEven = numbers.stream().filter(number -> number % 2 == 0).map(number -> number * 2)
+        // .collect(toList());
+        //
+        // System.out.println(doubleOfEven);
+        //
+        // /* Create a map with name and age as key and person object as value */
+        // System.out.println(
+        // people.stream().collect(toMap(person -> person.getName() + "-" + person.getAge(), person -> person)));
 
         /*
          * Create a map where their name is the key and value is all the people with that name.
@@ -180,8 +173,8 @@ public class MethodRefsAndStreams
         // Stream.iterate(100, e -> e + 1);
 
         /* Convert all the names to upper case separated by comma, String Joining */
-        System.out.println("Convert to uppercase and separate by comma: "
-                + names.stream().map(String::toUpperCase).collect(joining(", ")));
+        // System.out.println("Convert to uppercase and separate by comma: "
+        // + names.stream().map(String::toUpperCase).collect(joining(", ")));
     }
 
     public static int compute(int number)

@@ -1,11 +1,9 @@
 package com.java.example.functional.programming;
 
-import static java.util.stream.Collectors.groupingBy;
-import static java.util.stream.Collectors.mapping;
-import static java.util.stream.Collectors.toList;
-
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Stream;
 
 import com.java.example.model.People;
 import com.java.example.model.Person;
@@ -52,8 +50,21 @@ public class StreamExample
 		// comparing(Person::getAge).thenComparing(Person::getName).reversed());
 
 		// Grouping people based on their age, name
-		System.out.println(people.stream().collect(
-				groupingBy(Person::getAge, mapping(Person::getName, toList()))));
+        // System.out.println(people.stream().collect(
+        // groupingBy(Person::getAge, mapping(Person::getName, toList()))));
 
+        List<String> list = Arrays.asList("abc1", "abc2", "abc3");
+        long size = list.stream().skip(1).map(element -> element.substring(0, 3)).sorted().count();
+        
+        // Lazy invocation
+        Stream<String> stream = list.stream().filter(element -> {
+            System.out.println("filter called");
+            return element.contains("2");
+        }).map(element -> {
+            System.out.println("map called");
+            return element.toUpperCase();
+        });
+
+        System.out.println(stream.findFirst().get());
 	}
 }

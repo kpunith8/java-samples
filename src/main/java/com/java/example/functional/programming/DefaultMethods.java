@@ -23,7 +23,8 @@ interface FastFly extends Fly
 	 * Overriding the base interface's default method, Overriden default method
 	 * takes the precedence over base's default method.
 	 */
-	default void takeOff()
+    @Override
+    default void takeOff()
 	{
 		System.out.println("FastFly::Take Off");
 	}
@@ -46,7 +47,8 @@ class SeaPlane extends Vehicle implements FastFly, Sail
 	 * of either of the classes, compiler complains to override the method either
 	 * from Sail or FastFly
 	 */
-	public void takeOff()
+    @Override
+    public void takeOff()
 	{
 		System.out.println("SeaPlane::Take Off");
 		/**

@@ -16,6 +16,7 @@ public class ForecastDisplay implements DisplayElement, Observer
         this.subject = subject;
         subject.registerObserver(this);
     }
+    
 
     @Override
     public void update(float temperature, float humidity, float pressure)
