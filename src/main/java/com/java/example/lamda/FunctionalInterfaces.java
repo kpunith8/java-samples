@@ -9,7 +9,7 @@ interface StringFunc
     String func(String s);
 }
 
-public class LambdaAndStreams {
+public class FunctionalInterfaces {
     // This method has a functional interface as the type of
     // its first parameter. Thus, it can be passed a reference to
     // any instance of that interface, including the instance created
@@ -26,8 +26,8 @@ public class LambdaAndStreams {
 
         System.out.println("Input string: " + inStr);
 
-        // Here, a simple expression lambda that uppercases a string
-        // is passed to stringOp( ).
+        // Here, a simple expression lambda that uppercases, a string
+        // is passed to stringOp().
         outStr = stringOp((str) -> str.toUpperCase(), inStr);
         System.out.println("The string in uppercase: " + outStr);
 

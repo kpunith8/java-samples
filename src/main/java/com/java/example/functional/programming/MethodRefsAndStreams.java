@@ -34,7 +34,7 @@ public class MethodRefsAndStreams
         // }
 
         /* Internal iterators */
-        /* Passing annonymous function to forEach */
+        /* Passing anonymous function to forEach */
 
         // numbers.forEach(new Consumer<Integer>()
         // {
@@ -122,13 +122,12 @@ public class MethodRefsAndStreams
         /* Using parallel streams to use the multiple threads */
 
         /* Using normal streams */
-        // TimeIt.code(() -> numbers.stream().filter(number -> number % 2 ==
-        // 0).mapToInt(IteratingArray::compute).sum());
+        TimeIt.code(
+                () -> numbers.stream().filter(number -> number % 2 == 0).mapToInt(MethodRefsAndStreams::compute).sum());
 
         /* Using parallel streams */
-        // TimeIt.code(() -> numbers.parallelStream().filter(number -> number % 2 ==
-        // 0).mapToInt(IteratingArray::compute)
-        // .sum());
+        TimeIt.code(() -> numbers.parallelStream().filter(number -> number % 2 == 0)
+                .mapToInt(MethodRefsAndStreams::compute).sum());
 
         // List<Integer> doubleOfEven1 = new ArrayList<>();
 
@@ -179,6 +178,8 @@ public class MethodRefsAndStreams
 
     public static int compute(int number)
     {
+        System.out.println("compute: " + number + " running in " + Thread.currentThread());
+
         // Assume it as time intensive computations
         try
         {
@@ -188,6 +189,7 @@ public class MethodRefsAndStreams
         catch (Exception e)
         {
         }
+
         return number * 2;
     }
 }
