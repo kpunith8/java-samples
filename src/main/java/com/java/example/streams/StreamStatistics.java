@@ -5,10 +5,12 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Comparator;
 import java.util.IntSummaryStatistics;
+import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.ToIntFunction;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class StreamStatistics
 {
@@ -45,5 +47,43 @@ public class StreamStatistics
                 .mapToInt(intScore).summaryStatistics();
 
         System.out.println("Stats: " + summaryStatistics);
+
+        // Parallel Streams
+        // Stream<Long> longStream = Stream.generate(() -> ThreadLocalRandom.current().nextLong());
+        //
+        // Stream<Long> longStream1 = ThreadLocalRandom.current().longs(10000000).mapToObj(Long::new);
+        //
+        // System.out.println("Normal Execution:");
+        // TimeIt.code(() -> longStream.limit(10000000).collect(Collectors.toList()));
+        //
+        // System.out.println("Parallel execution:");
+        // TimeIt.code(() -> longStream1.parallel().collect(Collectors.toList()));
+
+        // Handling the thread pool for parallelism
+        // System.setProperty("java.util.concurrent.ForkJoinPool.common.parallelism", "1");
+
+        Stream.iterate("+", s -> s + "+").parallel().limit(6)
+                .peek(s -> System.out.println(s + " Processed in the thread: " + Thread.currentThread().getName()))
+                .forEach(s -> {
+                });
+
+        // Concurrent issue in parallel stream
+
+        // It could end up in an ArrayOutOfBoundOfException because ArrayList is not thread safe
+        // List<String> strings = new ArrayList<>();
+
+        // use CopyOnWriteArrayList to avoid these problems, don't use this is in production
+        /// List<String> strings1 = new CopyOnWriteArrayList<>();
+
+        // Stream.iterate("+", s -> s + "+").parallel().limit(10000).forEach(e -> strings1.add(e));
+
+        // System.out.println("# of strings: " + strings1.size());
+
+        // Instead of adding elements in forEach to the collection use Collectors.toList()
+        // which is thread safe
+        
+        List<String> str = Stream.iterate("+", s -> s + "+").parallel().limit(10000).collect(Collectors.toList());
+
+        System.out.println("# of strings: " + str.size());
     }
 }
