@@ -3,6 +3,8 @@ package com.java.example.functional.programming;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import com.java.example.model.People;
@@ -22,9 +24,31 @@ public class StreamExample
 
 	public static void main(String[] args)
 	{
+        // Generate streams
+        // Stream.generate(() -> "element").limit(10).forEach(System.out::println);
+
+        // Primitive Streams
+        IntStream intStream = IntStream.range(1, 10); // rangeClosed
+        // intStream.filter(x -> x % 2 == 0).forEach(System.out::println);
+
+
         // Initialise with new ArrayList(createPeople()), it won't allow removing
         // action on Arrays.asList()
         List<Person> people = People.createPeople();
+
+        System.out.println("Average Age: " + people.stream().collect(Collectors.averagingDouble(Person::getAge)));
+
+        // Summarizing, it has getCount(), getSum(), getMin(), getAverage(), and getMax()
+        System.out.println("Summarizing Age: " + people.stream().collect(Collectors.summarizingDouble(Person::getAge)));
+
+        // Partition the stream based on a predicate
+        System.out.println(
+                "Group ages: "
+                        + people.stream().collect(Collectors.partitioningBy(person -> person.getAge() > 30)));
+
+        // Group the stream based on a predicate
+        System.out.println("Partition ages: "
+                + people.stream().collect(Collectors.groupingBy(Person::getAge)));
 
         // people.add(new Person("Sara", Gender.FEMALE, 28));
         // people.add(new Person("Jack", Gender.FEMALE, 2));
@@ -48,7 +72,6 @@ public class StreamExample
         // Reversing the order
 		// printSorted(people,
 		// comparing(Person::getAge).thenComparing(Person::getName).reversed());
-
 		// Grouping people based on their age, name
         // System.out.println(people.stream().collect(
         // groupingBy(Person::getAge, mapping(Person::getName, toList()))));
@@ -65,6 +88,6 @@ public class StreamExample
             return element.toUpperCase();
         });
 
-        System.out.println(stream.findFirst().get());
+        // System.out.println(stream.findFirst().get());
 	}
 }

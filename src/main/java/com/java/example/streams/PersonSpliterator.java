@@ -23,6 +23,7 @@ public class PersonSpliterator implements Spliterator<Person>
     public int characteristics()
     {
         return lineSpliterator.characteristics();
+        // Spliterator.ORDERED, Spliterator.SIZED, Spliterator.SUBSIZED;
     }
 
     @Override
