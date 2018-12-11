@@ -31,7 +31,7 @@ public class CollectorsSample
         Map<String, Integer> toMap = givenList.stream()
                 .collect(Collectors.toMap(Function.identity(), String::length));
 
-        // String joining = givenList.stream().collect(Collectors.joining());
+        // String joining = givenList.stream().collect(Collectors.joining(", "));
         String joining = givenList.stream().collect(Collectors.joining(" ", "PRE-", "-POST"));
 
         long counting = givenList.stream().collect(Collectors.counting());
@@ -51,7 +51,7 @@ public class CollectorsSample
                 .collect(partitioningBy(s -> s.length() > 2));
 
         System.out.println(partitionBy);
-        // it could be getCoount(), getMax(), getMin(), and so on
-        // System.out.println("Average: " + result.getAverage());
+        // it could be getCount(), getMax(), getMin(), and so on
+        System.out.println("Average: " + result.getMin());
     }
 }

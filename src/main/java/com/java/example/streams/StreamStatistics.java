@@ -6,15 +6,15 @@ import java.nio.file.Paths;
 import java.util.Comparator;
 import java.util.IntSummaryStatistics;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.ToIntFunction;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * <p>
- * Consists of statistics examples using stream and parallel streams
+ * Consists of statistics examples using streams, parallel streams, and collectors
  * </p>
  * 
  * @author Punith K
@@ -55,7 +55,8 @@ public class StreamStatistics
 
         System.out.println("Stats: " + summaryStatistics);
 
-        // Parallel Streams
+        /* Parallel Streams */
+
         // Stream<Long> longStream = Stream.generate(() -> ThreadLocalRandom.current().nextLong());
         //
         // Stream<Long> longStream1 = ThreadLocalRandom.current().longs(10000000).mapToObj(Long::new);
@@ -69,12 +70,12 @@ public class StreamStatistics
         // Handling the thread pool for parallelism
         // System.setProperty("java.util.concurrent.ForkJoinPool.common.parallelism", "1");
 
-        Stream.iterate("+", s -> s + "+").parallel().limit(6)
-                .peek(s -> System.out.println(s + " Processed in the thread: " + Thread.currentThread().getName()))
-                .forEach(s -> {
-                });
+        // Stream.iterate("+", s -> s + "+").parallel().limit(6)
+        // .peek(s -> System.out.println(s + " Processed in the thread: " + Thread.currentThread().getName()))
+        // .forEach(s -> {
+        // });
 
-        // Concurrent issue in parallel stream
+        /* Concurrent issue in parallel stream */
 
         // It could end up in an ArrayOutOfBoundOfException because ArrayList is not thread safe
         // List<String> strings = new ArrayList<>();
@@ -89,8 +90,20 @@ public class StreamStatistics
         // Instead of adding elements in forEach to the collection use Collectors.toList()
         // which is thread safe
         
-        List<String> str = Stream.iterate("+", s -> s + "+").parallel().limit(10000).collect(Collectors.toList());
+        // List<String> str = Stream.iterate("+", s -> s + "+").parallel().limit(10000).collect(Collectors.toList());
+        //
+        // System.out.println("# of strings: " + str.size());
 
-        System.out.println("# of strings: " + str.size());
+        /*
+         * Collectors example
+         */
+        Map<Integer, List<String>> histoWordsByScore = shakespeareWords.stream()
+                .collect(Collectors.groupingBy(score));
+        // System.out.println(histoWordsByScore);
+
+        System.out.println("# of histo words: " + histoWordsByScore.size());
+
+        histoWordsByScore.entrySet().stream().sorted(Comparator.comparing(entry -> -entry.getKey())).limit(3)
+                .forEach(entry -> System.out.println(entry.getKey() + " - " + entry.getValue()));
     }
 }

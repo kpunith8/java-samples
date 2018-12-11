@@ -9,6 +9,13 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * <p>
+ * Flat map
+ * </p>
+ * 
+ * @author Punith K
+ */
 public class flatMapExample
 {
     public static void main(String[] args) throws IOException
@@ -31,5 +38,6 @@ public class flatMapExample
         Stream<String> streamOfWords = streamOfLines.flatMap(lineSpilter).filter(word -> word.length() > 3).distinct()
                 .map(String::toLowerCase);
         System.out.println("distinct words lowercased: " + streamOfWords.collect(Collectors.toList()));
+
     }
 }
