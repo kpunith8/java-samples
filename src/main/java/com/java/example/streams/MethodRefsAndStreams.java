@@ -1,8 +1,9 @@
-package com.java.example.functional.programming;
+package com.java.example.streams;
 
 import java.util.Arrays;
 import java.util.List;
 
+import com.java.example.functional.programming.TimeIt;
 import com.java.example.model.People;
 import com.java.example.model.Person;
 

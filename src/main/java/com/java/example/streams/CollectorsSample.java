@@ -1,4 +1,4 @@
-package com.java.example.functional.programming;
+package com.java.example.streams;
 
 import static java.util.stream.Collectors.partitioningBy;
 import static java.util.stream.Collectors.summarizingDouble;

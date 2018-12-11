@@ -12,6 +12,13 @@ import java.util.function.ToIntFunction;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * <p>
+ * Consists of statistics examples using stream and parallel streams
+ * </p>
+ * 
+ * @author Punith K
+ */
 public class StreamStatistics
 {
     public static void main(String[] args) throws IOException

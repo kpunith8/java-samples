@@ -1,4 +1,4 @@
-package com.java.example.functional.programming;
+package com.java.example.streams;
 
 import java.util.Arrays;
 import java.util.Comparator;
