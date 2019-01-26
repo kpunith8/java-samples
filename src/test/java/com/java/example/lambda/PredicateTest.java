@@ -3,16 +3,17 @@ package com.java.example.lambda;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import java.util.Objects;
 import java.util.function.Predicate;
 
 import org.junit.Test;
 
-public class TestPredicate
+public class PredicateTest
 {
     @Test
     public void testPredicate_string_empty_nonEmpty()
     {
-        Predicate<String> isEmpty = s -> s.isEmpty();
+        Predicate<String> isEmpty = String::isEmpty;
         Predicate<String> isNotEmpty = isEmpty.negate();
         
         assertThat(isNotEmpty.test(""), is(false));
@@ -25,13 +26,26 @@ public class TestPredicate
     @Test
     public void testPredicate_string_nonNull_orNonEmpty()
     {
-        Predicate<String> nonNull = s -> s != null;
-        Predicate<String> isEmpty = s -> s.isEmpty();
+        Predicate<String> nonNull = Objects::nonNull;
+        Predicate<String> isEmpty = String::isEmpty;
 
         Predicate<String> predicate = nonNull.and(isEmpty.negate());
 
         assertThat(predicate.test("Punith"), is(true));
         assertThat(predicate.test(null), is(false));
         assertThat(predicate.test(""), is(false));
+    }
+
+    @Test
+    public void testPredicate_xOr_Operation()
+    {
+        Predicate<String> p1 = s -> s.length() == 4;
+        Predicate<String> p2 = s -> s.startsWith("J");
+
+        Predicate<String> predicate = p1.negate().or(p2.negate());
+
+        assertThat(predicate.test("True"), is(true));
+        assertThat(predicate.test("Julia"), is(true));
+        assertThat(predicate.test("Java"), is(false));
     }
 }

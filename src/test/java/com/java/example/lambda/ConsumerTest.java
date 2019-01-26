@@ -11,7 +11,7 @@ import java.util.function.Consumer;
 
 import org.junit.Test;
 
-public class TestConsumer
+public class ConsumerTest
 {
     @Test
     public void testConsumer_returnsEmptyList()
