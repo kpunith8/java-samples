@@ -32,7 +32,7 @@ public class OptionalSample
         // System.out.println("# of items: " + result.size());
 
         Function<Double, Stream<Double>> flatMapper = d -> OptionalSample.inv(d)
-                .flatMap(inv -> OptionalSample.sqrt(inv)).map(sqrt -> Stream.of(sqrt))
+                .flatMap(OptionalSample::sqrt).map(sqrt -> Stream.of(sqrt))
                 .orElseGet(() -> Stream.empty());
         
         result = ThreadLocalRandom.current().doubles(10_000).parallel().boxed().flatMap(flatMapper)

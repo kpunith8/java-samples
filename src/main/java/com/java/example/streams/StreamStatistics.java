@@ -26,10 +26,10 @@ public class StreamStatistics
         // https://introcs.cs.princeton.edu/java/data/words.shakespeare.txt
         // https://introcs.cs.princeton.edu/java/data/ospd.txt
 
-        Set<String> shakespeareWords = Files.lines(Paths.get("C:/project_workspace/files/words-shakespeare.txt"))
+        Set<String> shakespeareWords = Files.lines(Paths.get("src/main/resources/files/words-shakespeare.txt"))
                 .map(String::toLowerCase).collect(Collectors.toSet());
 
-        Set<String> scrabbleWords = Files.lines(Paths.get("C:/project_workspace/files/scrabble-words.txt"))
+        Set<String> scrabbleWords = Files.lines(Paths.get("src/main/resources/files/scrabble-words.txt"))
                 .map(String::toLowerCase).collect(Collectors.toSet());
 
         System.out.println("# words in shakespeare: " + shakespeareWords.size());

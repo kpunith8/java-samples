@@ -1,0 +1,9 @@
+Punith
+MALE
+29
+Rama
+FEMALE
+33
+Krishna
+MALE
+35

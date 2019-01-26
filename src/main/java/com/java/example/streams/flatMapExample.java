@@ -20,8 +20,8 @@ public class flatMapExample
 {
     public static void main(String[] args) throws IOException
     {
-        Path path = Paths.get("C:/project_workspace/files/person.txt");
-        Path path1 = Paths.get("C:/project_workspace/files/person1.txt");
+        Path path = Paths.get("src/main/resources//files/person.txt");
+        Path path1 = Paths.get("src/main/resources/files/person1.txt");
 
         Stream<String> stream1 = Files.lines(path);
         Stream<String> stream2 = Files.lines(path1);

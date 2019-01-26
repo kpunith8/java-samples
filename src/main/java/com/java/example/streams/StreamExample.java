@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import com.java.example.model.People;
 import com.java.example.model.Person;
@@ -89,5 +90,27 @@ public class StreamExample
         });
 
         // System.out.println(stream.findFirst().get());
+
+        // get an array of Strings and only select even indexed elements
+
+        String[] names = { "Afrim", "Bashkim", "Besim", "Lulzim", "Durim", "Shpetim" };
+
+        List<Person> evenIndexedNames = IntStream.range(0, people.size()).filter(i -> i % 2 == 0)
+                .mapToObj(i -> people.get(i)).collect(Collectors.toList());
+
+        System.out.println("selected even indexed elements:" + evenIndexedNames);
+
+        /**
+         * Converting Iterable to Stream. The Iterable interface is designed keeping generality in mind and does not
+         * provide any stream() method on its own. Pass Iterable to {@Link StreamSupport.stream()} method and get a
+         * Stream from the given Iterable instance.
+         */
+        Iterable<String> stringIterable = Arrays.asList("Testing", "Iterable", "conversion", "to", "Stream");
+
+        // set second parameter to true to enable parallelism
+        List<String> iterableToStream = StreamSupport.stream(stringIterable.spliterator(), false)
+                .map(String::toUpperCase).collect(Collectors.toList());
+
+        System.out.println("Converting Iterable to streams: " + iterableToStream);
 	}
 }
