@@ -4,7 +4,7 @@ import java.util.Objects;
 
 /**
  * <p>
- * Same copy as that of one in JDK 1.8.
+ * Same as that of one in JDK 1.8.
  * </p>
  * 
  * @author Punith K

@@ -66,7 +66,7 @@ public class StreamExample
 		// Compare by age
 		// printSorted(people, comparing(Person::getAge));
 
-		// Compare by age, followed bby name
+        // Compare by age, followed by name
 		// printSorted(people,
 		// comparing(Person::getAge).thenComparing(Person::getName));
 

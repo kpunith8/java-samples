@@ -24,7 +24,7 @@ public class PredicateTest
     }
 
     @Test
-    public void testPredicate_string_nonNull_orNonEmpty()
+    public void testPredicate_string_nonNull_andNonEmpty()
     {
         Predicate<String> nonNull = Objects::nonNull;
         Predicate<String> isEmpty = String::isEmpty;
