@@ -1,6 +1,6 @@
 package com.java.example.threads;
 
-public class ThreadUsingRunnable
+public class RaceCondition
 {
     public static void main(String[] args) throws InterruptedException
     {
@@ -103,7 +103,7 @@ class LongWrapperNoRaceCondition
 
     public long getValue()
     {
-        return value;
+        return value; // getValue() should be put in a synchronized block to guarantee the read.
     }
 
     public void incrementByOne()

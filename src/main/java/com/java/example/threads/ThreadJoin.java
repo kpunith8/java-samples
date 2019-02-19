@@ -8,7 +8,7 @@ package com.java.example.threads;
  * 
  * @author Punith K
  */
-public class JoinDemo
+public class ThreadJoin
 {
     private static class ParallelTask implements Runnable
     {

@@ -14,7 +14,7 @@ public class CustomSpliterator
 {
     public static void main(String[] args)
     {
-        Path path = Paths.get("C:/project_workspace/files/person.txt");
+        Path path = Paths.get("src/main/resources/files/person.txt");
 
         // try with resource
         try (Stream<String> lines = Files.lines(path))

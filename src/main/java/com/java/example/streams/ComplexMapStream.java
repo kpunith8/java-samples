@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ComplexMapStream
 {
@@ -30,12 +31,30 @@ public class ComplexMapStream
 
         Set<Integer> matchingListWithPredicate = hashMapWithList.entrySet().stream()
                 .filter(listToLookFor -> listToLookFor.getValue().contains(valueToSearch))
-                .map(filteredList -> filteredList.getKey()).collect(Collectors.toSet());
+                .map(Map.Entry::getKey).collect(Collectors.toSet());
 
         System.out.println("Filter Predicate: " + matchingListWithPredicate);
         Set<Integer> finalResult = itemsToSearch.stream().filter(a -> matchingListWithPredicate.contains(a))
                 .collect(Collectors.toSet());
 
         System.out.println("Final Filtered Result" + finalResult);
+
+        // get map stream
+        Stream<Map.Entry<String, String>> stream = getMapStream();
+
+        // construct a new map from the stream
+        Map<String, String> map = stream.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+        System.out.println(map);
+    }
+
+    // Function to get Stream of map mappings
+    private static Stream<Map.Entry<String, String>> getMapStream()
+    {
+        Map<String, String> vehicle = new HashMap<>();
+        vehicle.put("CAR", "Audi");
+        vehicle.put("BIKE", "Harley Davidson");
+
+        return vehicle.entrySet().stream();
     }
 }
