@@ -1,12 +1,20 @@
 package com.java.example.devoxx;
 
+import static java.util.stream.Collectors.counting;
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
 
 import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.function.IntUnaryOperator;
+import java.util.regex.Pattern;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 
 import com.java.example.model.DataHelper;
@@ -63,12 +71,73 @@ public class MapFilterExample {
 		// Duplicates are eliminated
 		Map<String, String> sonnetMap = DataHelper.getSonnet().stream().collect(toMap(line -> line.substring(0, 1),
 				line -> line, (line1, line2) -> line1 + System.lineSeparator() + line2));
-		// line -> line can be written as Function.identity
+		// line -> line can be written as Function.identity()
 
 		// System.out.println(
-		// "map by first char of each line of a sonnet as a key (remove dupicate keys,
+		// "map by first char of each line of a sonnet as a key (remove duplicate keys,
 		// dupicates are eliminated):");
 		// sonnetMap.entrySet().stream().forEach(System.out::println);
+
+		/*
+		 * groupingBy() - produces a map - they take a classifier function to transform
+		 * each stream element into a key Stream<T> => Map<K, List<V>>
+		 */
+		Map<Integer, List<String>> groupByLengthOfString = DataHelper.getAllNames().stream()
+				.collect(Collectors.groupingBy(String::length));
+
+		System.out.println("Group the names by length of the name: " + groupByLengthOfString);
+
+		Map<String, List<String>> groupSonnetByFirstChar = DataHelper.getSonnet().stream()
+				.collect(Collectors.groupingBy(line -> line.substring(0, 1)));
+
+		Map<String, Long> groupSonnetByFirstCharAndLength = DataHelper.getSonnet().stream()
+				.collect(Collectors.groupingBy(line -> line.substring(0, 1), Collectors.counting()));
+
+		Map<String, List<Integer>> groupSonnetByFirstCharAndLengthOfEachSentence = DataHelper.getSonnet().stream()
+				.collect(Collectors.groupingBy(line -> line.substring(0, 1),
+						Collectors.mapping(String::length, Collectors.toList())));
+
+		Map<String, Set<String>> groupSonnetByFirstCharAndFirstWordOfEachSentence = DataHelper.getSonnet().stream()
+				.collect(Collectors.groupingBy(line -> line.substring(0, 1),
+						Collectors.mapping(line -> line.split(" +")[0], Collectors.toSet())));
+
+		System.out.println("Group the sonnet by first char of the sonnet: " + groupSonnetByFirstChar);
+		System.out
+				.println("Group the sonnet by first char of the sonnet and length: " + groupSonnetByFirstCharAndLength);
+		System.out.println("Group the sonnet by first char of the sonnet and length of each sentence: "
+				+ groupSonnetByFirstCharAndLengthOfEachSentence);
+		System.out.println("Group the sonnet by first char of the sonnet and first word of each sentence: "
+				+ groupSonnetByFirstCharAndFirstWordOfEachSentence);
+
+		// Generate frequency table of letters
+		Map<String, Long> frequencyTableForEachLatterInTheSonnet = DataHelper.getSonnet().stream()
+				.flatMap(line -> DataHelper.expand(line).stream()).collect(groupingBy(Function.identity(), counting()));
+		frequencyTableForEachLatterInTheSonnet.forEach((letter, count) -> System.out.println(letter + " => " + count));
+
+		// Find the most frequently occurring word in the sonnet
+		Pattern pattern = Pattern.compile("[ ,':\\-]+");
+		Collector<String, ?, Map<String, Long>> groupingByCollector = groupingBy(Function.identity(),
+				Collectors.counting());
+
+		Map<String, Long> mapOfWordsWithCount = DataHelper.getSonnet().stream().flatMap(pattern::splitAsStream)
+				.collect(groupingByCollector);
+
+		System.out.println("Words with count: " + mapOfWordsWithCount);
+
+		Map.Entry<String, Long> mostFrequentWord = mapOfWordsWithCount.entrySet().stream()
+				.max(Map.Entry.comparingByValue()).orElseThrow();
+
+		System.out.println("Most frequent word: " + mostFrequentWord);
+
+		// Get the all most frequent words with the same count
+		// Invert the map by switching Map<Long, List<String>>
+		Map<Long, List<String>> mostFrequentWordsMap = mapOfWordsWithCount.entrySet().stream().collect(Collectors
+				.groupingBy(Entry<String, Long>::getValue, Collectors.mapping(Entry<String, Long>::getKey, toList())));
+
+		Map.Entry<Long, List<String>> mostFrequentWords = mostFrequentWordsMap.entrySet().stream()
+				.max(Map.Entry.comparingByKey()).orElseThrow();
+
+		System.out.println("Most frequent words with the same length: " + mostFrequentWords);
 	}
 
 	// function combination, if you want pass multiple predicates to filter the

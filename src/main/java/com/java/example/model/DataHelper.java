@@ -19,7 +19,7 @@ public class DataHelper {
 				"Thy self thy foe, to thy sweet self too cruel:", "Thou that art now the world's fresh ornament,",
 				"And only herald to the gaudy spring,", "Within thine own bud buriest thy content,",
 				"And, tender churl, mak'st waste in niggarding:", "Pity the world, or else this glutton be,",
-				"To eat the world's due, by the grave and thee.");
+				"To eat the world's due, by the grave and thee thy thy thy.");
 	}
 
 	public static List<String> expand(String str) {
