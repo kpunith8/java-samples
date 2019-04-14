@@ -2,7 +2,7 @@ package com.java.example.builderpattern;
 
 /**
  * <p>
- *
+ * Builder pattern example.
  * </p>
  * 
  * @author Punith K
