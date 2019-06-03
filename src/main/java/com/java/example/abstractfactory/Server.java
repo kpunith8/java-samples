@@ -1,6 +1,6 @@
 package com.java.example.abstractfactory;
 
-public class Server extends Computer
+public class Server implements Computer
 {
     private String ram;
     private String hdd;

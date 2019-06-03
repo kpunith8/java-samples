@@ -1,6 +1,6 @@
 package com.java.example.abstractfactory;
 
-public class PC extends Computer
+public class PC implements Computer
 {
     private String ram;
     private String hdd;

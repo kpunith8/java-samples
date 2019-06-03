@@ -20,6 +20,8 @@ public class MapFunctions
         // Declarative way
         sqrt.computeIfAbsent(2, MapFunctions::compute);
         sqrt.computeIfAbsent(2, MapFunctions::compute);
+        sqrt.computeIfAbsent(4, MapFunctions::compute);
         System.out.println(sqrt.get(2));
+        System.out.println(sqrt.get(4));
     }
 }

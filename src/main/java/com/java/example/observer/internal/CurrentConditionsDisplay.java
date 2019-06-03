@@ -10,7 +10,7 @@ public class CurrentConditionsDisplay implements DisplayElement, Observer
     private float humidity;
     private float pressure;
 
-    private Subject subject;
+    private final Subject subject;
 
     public CurrentConditionsDisplay(Subject subject)
     {
@@ -33,5 +33,4 @@ public class CurrentConditionsDisplay implements DisplayElement, Observer
         System.out.println("Current Conditions: " + temperature + "F degrees, " + humidity + "% humidity, and "
                 + pressure + " pressure");
     }
-
 }

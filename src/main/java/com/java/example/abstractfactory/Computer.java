@@ -1,15 +1,9 @@
 package com.java.example.abstractfactory;
 
-public abstract class Computer
-{
-    public abstract String getRAM();
+public interface Computer {
+	String getRAM();
 
-    public abstract String getHDD();
+	String getHDD();
 
-    public abstract String getCPU();
-
-    @Override
-    public String toString(){
-        return "RAM= " + this.getRAM() + ", HDD=" + this.getHDD() + ",CPU=" + this.getCPU();
-    }
+	String getCPU();
 }
