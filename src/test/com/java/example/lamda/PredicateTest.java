@@ -14,9 +14,9 @@ public class PredicateTest {
         Predicate<String> isEmpty = String::isEmpty;
         Predicate<String> isNotEmpty = isEmpty.negate();
 
-        Assertions.assertEquals(isNotEmpty.test(""), false);
-        Assertions.assertEquals(isEmpty.test("Punith"), false);
-        Assertions.assertEquals(isEmpty.test(""), true);
+        Assertions.assertFalse(isNotEmpty.test(""));
+        Assertions.assertFalse(isEmpty.test("Punith"));
+        Assertions.assertTrue(isEmpty.test(""));
     }
 
     @Test
@@ -27,9 +27,9 @@ public class PredicateTest {
 
         Predicate<String> predicate = nonNull.and(isEmpty.negate());
 
-        Assertions.assertEquals(predicate.test("Punith"), true);
-        Assertions.assertEquals(predicate.test(null), false);
-        Assertions.assertEquals(predicate.test(""), false);
+        Assertions.assertTrue(predicate.test("Punith"));
+        Assertions.assertFalse(predicate.test(null));
+        Assertions.assertFalse(predicate.test(""));
     }
 
     @Test
@@ -40,8 +40,8 @@ public class PredicateTest {
 
         Predicate<String> predicate = p1.negate().or(p2.negate());
 
-        Assertions.assertEquals(predicate.test("True"), true);
-        Assertions.assertEquals(predicate.test("Julia"), true);
-        Assertions.assertEquals(predicate.test("Java"), false);
+        Assertions.assertTrue(predicate.test("True"));
+        Assertions.assertTrue(predicate.test("Julia"));
+        Assertions.assertFalse(predicate.test("Java"));
     }
 }
